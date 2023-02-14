@@ -21,5 +21,3 @@ poglavja:
       - ime: Datoteka o kvantni mehaniki
         pot: datoteke/pot_do_datoteke.docx
 ---
-
-Tukaj se nahajajo gradiva za pouk
