@@ -5,6 +5,8 @@ layout: default
 <li class="list-group-item"><i class="bi bi-calendar-event me-2"></i> {% unless page.neznan_tocni_dan %}{{ page.datum | date: '%-d. %-m. %Y' }}{% else %}{{ page.datum | date: '%-m. %Y' }}{% endunless %}</li>
 {% if page.nosilec %}<li class="list-group-item"><i class="bi bi-person me-2"></i> {{ page.nosilec }}</li>{% endif %}
 {% if page.kraj %}<li class="list-group-item"><i class="bi bi-geo-alt me-2"></i> {{ page.kraj }}</li>{% endif %}
+{% if page.vrsta %}<li class="list-group-item"><i class="bi bi-tag me-2"></i> {{ page.vrsta }}</li>{% endif %}
+
 </ul>
 
 {{ content }}

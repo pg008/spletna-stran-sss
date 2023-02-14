@@ -20,8 +20,9 @@ layout: default
         {% endif %}
         <ul class="list-group list-group-flush h-100">
         <li class="list-group-item"><i class="bi bi-calendar-event me-2"></i> {% unless dogodek.neznan_tocni_dan %}{{ dogodek.datum | date: '%-d. %-m. %Y' }}{% else %}{{ dogodek.datum | date: '%-m. %Y' }}{% endunless %}</li>
-        <li class="list-group-item"><i class="bi bi-person me-2"></i> {{ dogodek.nosilec }}</li>
+        {% if dogodek.nosilec %}<li class="list-group-item"><i class="bi bi-person me-2"></i> {{ dogodek.nosilec }}</li>{% endif %}
         {% if dogodek.kraj %}<li class="list-group-item"><i class="bi bi-geo-alt me-2"></i> {{ dogodek.kraj }}</li>{% endif %}
+        {% if dogodek.vrsta %}<li class="list-group-item"><i class="bi bi-tag me-2"></i> {{ dogodek.vrsta }}</li>{% endif %}
         <li class="list-group-item h-100 d-flex flex-row align-items-end"><a href="{{ dogodek.url }}" class="btn btn-primary w-100">Preberi več</a></li>
         </ul>
     </div>
