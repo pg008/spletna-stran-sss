@@ -1,0 +1,18 @@
+title: Učenje, poučevanje in doživljanje fizike
+subtitle: Program profesionalnega usposabljanja za učiteljice in učitelje fizike na srednjih šolah in gimnazijah
+baseurl:
+
+collections:
+  dogodki:
+    output: true
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "dogodki"
+    values:
+      layout: "dogodek"
+      sort_by: datum
+
+permalink: pretty

@@ -1,0 +1,38 @@
+---
+layout: default
+---
+
+
+<h2>Program {{ "" | trenutno_solsko_leto_polno }}</h2>
+<div class="row">
+    
+    {% for dogodek in site.dogodki %}
+    {% assign dd = dogodek.datum | solsko_leto %}
+    {% assign tl = "" | trenutno_solsko_leto %}
+    {% if dd == tl %}
+    <div class="col-sm-6 col-md-4 mb-4">
+    <div class="card h-100">
+        {% if dogodek.slike %}
+        <img src="{{ dogodek.slike | first }}" class="card-img-top" alt="...">
+        {% else %}
+        <img src="{{ site.baseurl }}/slike/experiment-icon-20.jpg" class="card-img-top" alt="...">
+        {% endif %}
+        <div class="card-header"><h5 class="card-title">{{ dogodek.title }}</h5></div>
+        {% if dogodek.kratek_opis %}
+        <div class="card-body">
+        <p class="card-text">{{ dogodek.kratek_opis }}</p>
+        </div>
+        {% endif %}
+        <ul class="list-group list-group-flush h-100">
+        <li class="list-group-item"><i class="bi bi-calendar-event me-2"></i> {% unless dogodek.neznan_tocni_dan %}{{ dogodek.datum | date: '%-d. %-m. %Y' }}{% else %}{{ dogodek.datum | date: '%-m. %Y' }}{% endunless %}</li>
+        <li class="list-group-item"><i class="bi bi-person me-2"></i> {{ dogodek.nosilec }}</li>
+        {% if dogodek.kraj %}<li class="list-group-item"><i class="bi bi-geo-alt me-2"></i> {{ dogodek.kraj }}</li>{% endif %}
+        <li class="list-group-item h-100 d-flex flex-row align-items-end"><a href="{{ dogodek.url }}" class="btn btn-primary w-100">Preberi več</a></li>
+        </ul>
+    </div>
+</div>
+    {% endif %}
+{% endfor %}
+</div>
+
+{{ content }}

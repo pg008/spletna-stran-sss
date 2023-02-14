@@ -1,0 +1,19 @@
+{% assign tip = datoteka.pot | split: "." | last | downcase %}
+<li class="me-3"><i class="bi bi-file-
+    {%- case tip -%}
+        {%- when 'docx', 'doc' -%}
+        earmark-word
+        {%- when 'zip', 'tar' -%}
+        zip
+        {%- when 'pptx', 'ppt' -%}
+        earmark-ppt
+        {%- when 'xlsx', 'xls' -%}
+        earmark-spreadsheet
+        {%- when 'pdf' -%}
+        earmark-pdf
+        {%- when 'mp4', 'mov', 'mp3' -%}
+        earmark-play
+        {%- else -%}
+        earmark
+    {%- endcase -%}
+"></i> <a class="text-secondary" href="{{site.url}}/{{datoteka.pot}}" download>{{datoteka.ime}}</a></li>

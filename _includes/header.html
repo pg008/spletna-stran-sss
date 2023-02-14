@@ -1,0 +1,40 @@
+<header>
+    <div
+        class="bg-image"
+        style="
+        background-image: url('{{ site.baseurl }}/slike/naslovna_slika.jpg');
+        background-size: cover;
+        height: 200px;
+    ">
+        <div class="mask h-100" style="background-color: rgba(0, 0, 0, 0.6);">
+            <div class="d-flex justify-content-center align-items-center align-middle h-100 container p-3">
+                <div class="text-white">
+                    <h1>{{ site.title }}</h1>
+                    <h3>{{ site.subtitle }}</h3>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+    <!-- Navigacijska vrstica -->
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav">
+                        {% assign sorted_pages = site.pages | sort:"order" %}
+                        {% for page_item in sorted_pages %}
+                        {% if page_item.title != null %}
+                        <a href="{{ page_item.url | prepend: site.baseurl }}" class="nav-item nav-link {% if page.url == page_item.url %} active{%- endif -%}">{{ page_item.title }}</a>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div> 
+</header>

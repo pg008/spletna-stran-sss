@@ -1,0 +1,57 @@
+---
+layout: default
+---
+
+{{ content }}
+
+{% assign obrnjeni_dogodki = site.dogodki | sort: "datum" | reverse %}
+
+<div class="accordion">
+    {% assign prvi = true %}
+    {% for d in obrnjeni_dogodki %}
+    {% assign datum_dogodka_niz = d.datum | date: "%Y%m%d" %}
+    {% assign trenutni_datum_niz = "now" | date: "%Y%m%d" %}
+    
+        {% if datum_dogodka_niz < trenutni_datum_niz %}
+        
+        {% assign trenutno_solsko_leto = d.datum | solsko_leto %}
+        {% if trenutno_solsko_leto != solsko_leto %}
+        {% unless prvi %}</ul>
+        </div>
+        </div>
+        </div>{% endunless %}
+
+        {% assign prvi = false %}
+        <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#y{{trenutno_solsko_leto}}" aria-controls="y{{trenutno_solsko_leto}}">
+                <i class="bi bi-calendar-week me-2"></i> {{ d.datum | solsko_leto_polno }}
+            </button>
+        </h2>
+        <div id="y{{trenutno_solsko_leto}}" class="accordion-collapse collapse">
+            <div class="accordion-body">
+                <ul class="list-group list-group-flush">
+        {% assign solsko_leto = trenutno_solsko_leto %}
+        {% endif %}
+            <li class="list-group-item">
+                <span class="text-secondary me-2"><i class="bi bi-calendar-event me-2"></i> 
+                    {{ d.datum | date: '%-d. %-m. %Y' }}
+                </span>
+                <a href="{{ d.url }}">{{ d.title }}</a>
+                <div><i class="bi bi-person me-2"></i> {{ d.nosilec }}</div>
+                <div><i class="bi bi-geo-alt me-2"></i> {{ d.kraj }}</div>
+                {% if d.datoteke %}
+                <div>
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i> Gradiva: <ul class="d-flex d-inline-flex list-unstyled ms-2">{% for datoteka in d.datoteke %}{% include datoteka_za_prenos.html %}{% endfor %}</ul>
+                </div>
+                {% endif %}
+                
+            </li>
+    {% endif %}
+    {% endfor %}
+    {% unless prvi %}</ul>
+    </div>
+    </div>
+    </div>{% endunless %}
+
+</div>

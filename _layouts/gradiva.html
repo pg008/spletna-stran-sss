@@ -1,0 +1,16 @@
+---
+layout: default
+---
+
+{{ content }}
+
+{% for poglavje in page.poglavja %}
+<h2>{{ poglavje.naslov }}</h2>
+
+    <ul class="list-unstyled">
+    {% for datoteka in poglavje.datoteke %}
+        {% include datoteka_za_prenos.html %}
+    {% endfor %}
+    </ul>
+
+{% endfor %}
