@@ -1,0 +1,12 @@
+{{ define "main" }}
+
+{{.Content}}
+
+<ul class="list-unstyled">
+    {{ range .Resources.Match "datoteke/*" }}
+        {{ partial "datoteka_za_prenos.html" . }}
+    {{ end }}
+    
+</ul>
+
+{{ end }}

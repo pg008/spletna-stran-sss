@@ -1,0 +1,24 @@
+{{ $pripone := .MediaType.Suffixes }}
+{{ $ikona := "earmark" }}
+{{ if in $pripone "docx" }}
+    {{ $ikona = "earmark-word" }}
+{{ else if in $pripone "doc" }}
+    {{ $ikona = "earmark-word" }}
+{{ else if in $pripone "zip" }}
+    {{ $ikona = "zip" }}
+{{ else if in $pripone "tar" }}
+    {{ $ikona = "zip" }}
+{{ else if in $pripone "pptx" }}
+    {{ $ikona = "earmark-ppt" }}
+{{ else if in $pripone "ppt" }}
+    {{ $ikona = "earmark-ppt" }}
+{{ else if in $pripone "xlsx" }}
+    {{ $ikona = "earmark-spreadsheet" }}
+{{ else if in $pripone "xls" }}
+    {{ $ikona = "earmark-spreadsheet" }}
+{{ else if in $pripone "pdf" }}
+    {{ $ikona = "earmark-pdf" }}
+{{ end }}
+<div class="card card-body mb-2">
+    <li class="me-3"><i class=" me-2 bi bi-file-{{ $ikona }}"></i><a class="text-secondary" href="{{ .RelPermalink }}" download>{{ strings.TrimSuffix (path.Ext .Name) (strings.TrimPrefix "datoteke/" .Name) }}</a></li>
+</div>

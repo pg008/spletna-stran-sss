@@ -1,11 +1,14 @@
 <header>
     <div
         class="bg-image"
+        {{ with resources.GetMatch "naslovna_slika.jpg" }}
         style="
-        background-image: url('/slike/naslovna_slika.jpg');
+        background-image: url('{{ .RelPermalink }}');
         background-size: cover;
         height: 200px;
-    ">
+        "
+        {{ end }}
+    >
         <div class="mask h-100" style="background-color: rgba(0, 0, 0, 0.6);">
             <div class="d-flex justify-content-center align-items-center align-middle h-100 container p-3">
                 <div class="text-white">
