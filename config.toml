@@ -1,4 +1,6 @@
-baseURL = 'http://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+baseURL = 'https://sss.fmf.uni-lj.si/'
+languageCode = 'sl'
+title = 'Učenje, poučevanje in doživljanje fizike'
 theme = 'predloga'
+[params]
+    subtitle = 'Program profesionalnega usposabljanja za učiteljice in učitelje fizike na srednjih šolah in gimnazijah'

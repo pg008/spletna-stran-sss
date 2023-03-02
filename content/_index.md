@@ -1,8 +1,6 @@
 ---
-title: "Homepage"
-subtitle: "Here I am"
-date: "2020–012–09"
-menu: "main"
-draft: "false"
----
-Hello World! 
+title: Domov
+menu: main
+--- 
+
+Kotizacija (vključno z DDV): 90 €
