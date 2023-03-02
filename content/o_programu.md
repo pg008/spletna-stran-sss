@@ -1,6 +1,7 @@
 ---
 title: O programu
 menu: main
+layout: o_programu
 letni_obseg: 24 ur
 nacin_izvedbe: Delavnice in predavanja s poudarkom na aktivnem vključevanju vseh udeležencev. Program tipično obsega 6 srečanj, ki so razporejena v obdobju od oktobra do maja.
 ---

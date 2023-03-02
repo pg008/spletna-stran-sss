@@ -1,8 +1,9 @@
 ---
 title: Domov
-menu: main
+menu:
+    main:
+        weight: 1
+
 --- 
 
 Stran še ni dokončana!
-
-Kotizacija (vključno z DDV): 90 €
