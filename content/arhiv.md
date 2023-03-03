@@ -1,6 +1,6 @@
 ---
 title: Arhiv
 menu: main
+layout: arhiv
 ---
 
-Stran še ni dokončana.

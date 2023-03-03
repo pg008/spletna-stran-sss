@@ -1,0 +1,10 @@
+{{ if (isset .Params "neznan_tocni_dan") }}
+
+{{ $meseci := slice "Januar" "Februar" "Marec" "April" "Maj" "Junij" "Julij" "Avgust" "September" "Oktober" "November" "December" }}
+{{ print (index $meseci (sub (time .Params.datum ).Month 1)) " " (time .Params.datum ).Year }}
+
+{{ else }}
+
+{{ print (time .Params.datum ).Day ". " (printf "%d" (time .Params.datum ).Month) ". " (time .Params.datum ).Year }}
+
+{{ end }}

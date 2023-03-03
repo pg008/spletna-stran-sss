@@ -2,9 +2,12 @@
 
 {{.Content}}
 
+
 <ul class="list-unstyled">
     {{ range .Resources.Match "datoteke/*" }}
+        <div class="card card-body mb-2">
         {{ partial "datoteka_za_prenos.html" . }}
+        </div>
     {{ end }}
     
 </ul>

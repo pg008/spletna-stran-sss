@@ -1,0 +1,31 @@
+{{ define "main" }}
+
+<ul class="list-group list-group-flush">
+{{ if isset .Params "datum" }}<li class="list-group-item"><i class="bi bi-calendar-event me-2"></i> {{ partial "datum" . }}</li>{{ end }}
+{{ with .Params.nosilec }}<li class="list-group-item"><i class="bi bi-person me-2"></i> {{ . }}</li>{{ end }}
+{{ with .Params.kraj }}<li class="list-group-item"><i class="bi bi-geo-alt me-2"></i> {{ . }}</li>{{ end }}
+{{ with .Params.vrsta }}<li class="list-group-item"><i class="bi bi-tag me-2"></i> {{ . }}</li>{{ end }}
+</ul>
+
+{{ .Content }}
+{{ with .Resources.Match "gradiva/*" }}
+<h4>Gradiva</h4>
+<ul class="list-unstyled">
+    {{ range . }}
+    <div class="card card-body mb-2">{{ partial "datoteka_za_prenos.html" . }}</div>
+    {{ end }}
+</ul>
+{{ end }}
+
+<div class="row">
+    {{ range .Resources.Match "slike/*" }}
+    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+        <img
+        src="{{ .RelPermalink }}"
+        class="w-100 shadow-1-strong rounded mb-4"
+        />
+    </div>
+    {{ end }}
+</div>
+
+{{ end }}

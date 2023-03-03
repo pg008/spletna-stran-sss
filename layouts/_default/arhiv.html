@@ -1,0 +1,72 @@
+{{ define "main" }}
+
+{{.Content}}
+
+{{ $dogodki := partial "pridobi_dogodke" . }}
+{{ $dogodki_po_solskih_letih := slice }}
+{{ range seq 2049 1950 }}
+    {{ $trenutno_solsko_leto := print (substr (string .) 2 2) "_" (substr (string (add . 1)) 2 2) }}
+    {{ $trenutno_solsko_leto_polno := print (string .) " / " (string (add . 1)) }}
+    {{ $dogodki_v_tem_letu := sort (where $dogodki ".Scratch.Values.solsko_leto" $trenutno_solsko_leto) ".Params.datum" "desc" }}
+    {{ if or ($dogodki_v_tem_letu) (($.Site.GetPage (print "dogodki/" $trenutno_solsko_leto "/gradiva")).Resources.Match "*") }}
+        {{ $dogodki_po_solskih_letih = $dogodki_po_solskih_letih | append (dict
+            "ime_leta" $trenutno_solsko_leto "ime_leta_polno" $trenutno_solsko_leto_polno "dogodki" $dogodki_v_tem_letu
+        ) }}
+    {{ end }}
+{{ end }}
+
+
+<div class="accordion">
+    {{ range $dogodki_po_solskih_letih }}
+        <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#y{{.ime_leta}}" aria-controls="y{{.ime_leta}}">
+                <i class="bi bi-calendar-week me-2"></i> {{ .ime_leta_polno }}
+            </button>
+        </h2>
+        <div id="y{{.ime_leta}}" class="accordion-collapse collapse">
+            <div class="accordion-body">
+                <ul class="list-group list-group-flush">
+                    {{ range .dogodki }}
+                    <li class="list-group-item">
+                        {{ if isset .Params "datum" }}
+                        <span class="text-secondary me-2"><i class="bi bi-calendar-event me-2"></i> 
+                            {{ partial "datum" . }}
+                        </span>
+                        {{ end }}
+                        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                        {{ with .Params.nosilec }}<div><i class="bi bi-person me-2"></i> {{ . }}</div>{{ end }}
+                        {{ with .Params.kraj }}<div><i class="bi bi-geo-alt me-2"></i> {{ . }}</div>{{ end }}
+                        {{ with .Resources.Match "gradiva/*" }}
+                        <div>
+                            <i class="bi bi-file-earmark-arrow-down me-2"></i>
+                            Gradiva: <ul class="d-flex d-inline-flex list-unstyled ms-2">
+                                {{ range . }}<span class="border border-secondary rounded p-1">{{ partial "datoteka_za_prenos.html" . }}</span>{{ end }}
+                            </ul>
+                        </div>
+                        {{ end }}
+                        
+                    </li>
+                    {{ end }}
+                
+                    {{ with ($.Site.GetPage (print "dogodki/" .ime_leta "/gradiva")).Resources.Match "*" }}
+                    <li class="list-group-item">
+                        <h5>Ostala gradiva</h5>
+                        <ul class="list-unstyled">
+                            {{ range . }}
+                                <div class="card card-body mb-2">
+                                {{ partial "datoteka_za_prenos.html" . }}
+                                </div>
+                            {{ end }}
+                            
+                        </ul>
+                    </li>
+                    {{ end }}
+                </ul>
+            </div>
+        </div>
+    </div>
+    {{ end }}
+</div>
+
+{{ end }}

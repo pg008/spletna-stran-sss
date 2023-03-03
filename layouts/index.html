@@ -1,0 +1,42 @@
+{{ define "main" }}
+
+
+{{ $dogodki := partial "pridobi_dogodke" . }}
+
+{{ $lsl := sub now.Year 1 }}
+{{ if (gt now.Month 8) }}
+    {{ $lsl = now.Year }}
+{{ end }}
+{{ $letosnje_solsko_leto := print (substr (string $lsl) 2 2) "_" (substr (string (add $lsl 1)) 2 2) }}
+
+{{ $letosnji_dogodki := sort (where $dogodki ".Scratch.Values.solsko_leto" $letosnje_solsko_leto) ".Params.datum" }}
+
+<div class="row">
+    {{ range $letosnji_dogodki }}
+    <div class="col-sm-6 col-md-4 mb-4">
+    <div class="card h-100">
+        <div class="card-header"><h5 class="card-title">{{ .Title }}</h5></div>
+        {{ with .Resources.GetMatch "slike/*" }}
+        <img src="{{ .RelPermalink }}" class="card-img-top" alt="...">
+        {{ end }}
+        {{ with .Params.kratek_opis }}
+        <div class="card-body">
+        <p class="card-text">{{ . }}</p>
+        </div>
+        {{ end }}
+        <ul class="list-group list-group-flush h-100">
+        {{ if isset .Params "datum" }}<li class="list-group-item"><i class="bi bi-calendar-event me-2"></i> {{ partial "datum" . }}</li>{{ end }}
+        {{ with .Params.nosilec }}<li class="list-group-item"><i class="bi bi-person me-2"></i> {{ . }}</li>{{ end }}
+        {{ with .Params.kraj }}<li class="list-group-item"><i class="bi bi-geo-alt me-2"></i> {{ . }}</li>{{ end }}
+        {{ with .Params.vrsta }}<li class="list-group-item"><i class="bi bi-tag me-2"></i> {{ . }}</li>{{ end }}
+        <li class="list-group-item h-100 d-flex flex-row align-items-end"><a href="{{ .RelPermalink }}" class="btn btn-primary w-100">Preberi več</a></li>
+        </ul>
+    </div>
+    </div>
+    {{ end }}
+</div>
+
+{{.Content}}
+
+
+{{ end }}

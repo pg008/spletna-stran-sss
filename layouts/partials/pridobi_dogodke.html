@@ -1,0 +1,8 @@
+{{ $dogodki := where (where .Site.Pages "Type" "dogodki") ".IsNode" false }}
+
+{{ range $dogodki }}
+{{ .Scratch.Set "solsko_leto" (path.Base (path.Dir (path.Dir .File))) }}
+{{ .Scratch.Values.sl }}
+{{ end }}
+
+{{ return $dogodki }}
