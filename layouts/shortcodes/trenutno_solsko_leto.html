@@ -1,0 +1,7 @@
+{{ $lsl := sub now.Year 1 }}
+{{ if (gt now.Month 8) }}
+    {{ $lsl = now.Year }}
+{{ end }}
+{{ $letosnje_solsko_leto := print (substr (string $lsl) 2 2) "_" (substr (string (add $lsl 1)) 2 2) }}
+{{ $letosnje_solsko_leto_polno := print (string $lsl) " / " (string (add $lsl 1)) }}
+{{ $letosnje_solsko_leto_polno }}

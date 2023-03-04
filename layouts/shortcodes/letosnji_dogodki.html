@@ -1,6 +1,3 @@
-{{ define "main" }}
-
-
 {{ $dogodki := partial "pridobi_dogodke" . }}
 
 {{ $lsl := sub now.Year 1 }}
@@ -10,10 +7,9 @@
 {{ $letosnje_solsko_leto := print (substr (string $lsl) 2 2) "_" (substr (string (add $lsl 1)) 2 2) }}
 {{ $letosnje_solsko_leto_polno := print (string $lsl) " / " (string (add $lsl 1)) }}
 
-
 {{ $letosnji_dogodki := sort (where $dogodki ".Scratch.Values.solsko_leto" $letosnje_solsko_leto) ".Params.datum" }}
-<h2>Program {{ $letosnje_solsko_leto_polno }}</h2>
-<br>
+
+
 <div class="row">
     {{ range $letosnji_dogodki }}
     <div class="col-sm-6 col-md-4 mb-4">
@@ -38,8 +34,3 @@
     </div>
     {{ end }}
 </div>
-
-{{.Content}}
-
-
-{{ end }}

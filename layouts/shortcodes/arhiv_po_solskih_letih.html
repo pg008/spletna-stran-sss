@@ -1,6 +1,3 @@
-{{ define "main" }}
-
-{{.Content}}
 {{ $dogodki := where (partial "pridobi_dogodke" .) ".Params.datum" "lt" (now.Format "2006-01-02") }}
 {{ $dogodki_po_solskih_letih := slice }}
 {{ range seq 2049 1950 }}
@@ -69,5 +66,3 @@
     </div>
     {{ end }}
 </div>
-
-{{ end }}

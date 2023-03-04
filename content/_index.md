@@ -6,4 +6,8 @@ menu:
 
 --- 
 
+## Program {{< trenutno_solsko_leto >}}  
+  
+{{< letosnji_dogodki >}}
+
 Kotizacija (vključno z DDV): 90 €
