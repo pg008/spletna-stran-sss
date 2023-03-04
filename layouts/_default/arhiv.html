@@ -1,8 +1,7 @@
 {{ define "main" }}
 
 {{.Content}}
-
-{{ $dogodki := partial "pridobi_dogodke" . }}
+{{ $dogodki := where (partial "pridobi_dogodke" .) ".Params.datum" "lt" (now.Format "2006-01-02") }}
 {{ $dogodki_po_solskih_letih := slice }}
 {{ range seq 2049 1950 }}
     {{ $trenutno_solsko_leto := print (substr (string .) 2 2) "_" (substr (string (add . 1)) 2 2) }}
@@ -40,8 +39,10 @@
                         {{ with .Resources.Match "gradiva/*" }}
                         <div>
                             <i class="bi bi-file-earmark-arrow-down me-2"></i>
-                            Gradiva: <ul class="d-flex d-inline-flex list-unstyled ms-2">
-                                {{ range . }}<span class="border border-secondary rounded p-1">{{ partial "datoteka_za_prenos.html" . }}</span>{{ end }}
+                            Gradiva: <ul class="list-unstyled ms-2">
+                                {{ range . }}
+                                <div class="border border-secondary rounded p-1 mb-1">{{ partial "datoteka_za_prenos.html" . }}</div>
+                                {{ end }}
                             </ul>
                         </div>
                         {{ end }}

@@ -1,5 +1,6 @@
 {{ $pripone := .MediaType.Suffixes }}
 {{ $ikona := "earmark" }}
+{{ $prenos := true }}
 {{ if in $pripone "docx" }}
     {{ $ikona = "earmark-word" }}
 {{ else if in $pripone "doc" }}
@@ -18,7 +19,6 @@
     {{ $ikona = "earmark-spreadsheet" }}
 {{ else if in $pripone "pdf" }}
     {{ $ikona = "earmark-pdf" }}
+    {{ $prenos = false }}
 {{ end }}
-<li class="me-3"><i class=" me-2 bi bi-file-{{ $ikona }}"></i><a class="text-secondary" href="{{ .RelPermalink }}" download>
-{{ strings.TrimSuffix (path.Ext .Name) (strings.TrimPrefix "datoteke/" (strings.TrimPrefix "gradiva/" .Name)) }}
-</a></li>
+<li class="me-3"><i class=" me-2 bi bi-file-{{ $ikona }}"></i><a class="text-secondary" href="{{ .RelPermalink }}" {{ if $prenos }}download{{ end }}>{{ strings.TrimSuffix (path.Ext .Name) (strings.TrimPrefix "datoteke/" (strings.TrimPrefix "gradiva/" .Name)) }}</a></li>

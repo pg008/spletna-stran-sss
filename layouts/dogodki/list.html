@@ -1,0 +1,41 @@
+{{ define "main" }}
+
+<ul class="list-ggroup list-group-flush">
+    {{ range .Pages }}
+    <li class="list-group-item">
+        {{ if isset .Params "datum" }}
+        <span class="text-secondary me-2"><i class="bi bi-calendar-event me-2"></i> 
+            {{ partial "datum" . }}
+        </span>
+        {{ end }}
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        {{ with .Params.nosilec }}<div><i class="bi bi-person me-2"></i> {{ . }}</div>{{ end }}
+        {{ with .Params.kraj }}<div><i class="bi bi-geo-alt me-2"></i> {{ . }}</div>{{ end }}
+        {{ with .Resources.Match "gradiva/*" }}
+        <div>
+            <i class="bi bi-file-earmark-arrow-down me-2"></i>
+            Gradiva: <ul class="d-flex d-inline-flex list-unstyled ms-2">
+                {{ range . }}<span class="border border-secondary rounded p-1">{{ partial "datoteka_za_prenos.html" . }}</span>{{ end }}
+            </ul>
+        </div>
+        {{ end }}
+        
+    </li>
+    {{ end }}
+
+    {{ with $.Resources.Match "*" }}
+    <li class="list-group-item">
+        <h5>Ostala gradiva</h5>
+        <ul class="list-unstyled">
+            {{ range . }}
+                <div class="card card-body mb-2">
+                {{ partial "datoteka_za_prenos.html" . }}
+                </div>
+            {{ end }}
+            
+        </ul>
+    </li>
+    {{ end }}
+</ul>
+
+{{ end }}
