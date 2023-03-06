@@ -2,8 +2,34 @@
 
 {{.Content}}
 
+{{ $gradiva := .Resources.Match "gradiva/*" }}
+{{ $poglavja := slice }}
+{{ $nerazvrscena_gradiva := slice }}
+{{ range $gradiva }}
+    {{ if isset .Params "poglavje" }}
+        {{ if not (in $poglavja .Params.poglavje) }}
+            {{ $poglavja = $poglavja | append .Params.poglavje }}
+        {{ end }}
+    {{ else }}
+        {{ $nerazvrscena_gradiva = $nerazvrscena_gradiva | append . }}
+    {{ end }}
+{{ end }}
+
+
+
 <ul class="list-unstyled">
-    {{ range .Resources.Match "gradiva/*" }}
+    {{ range $poglavja }}
+        <h2>{{ . }}</h2>
+        {{ range where $gradiva ".Params.poglavje" . }}
+        <div class="card card-body mb-2">
+            {{ partial "datoteka_za_prenos.html" . }}
+        </div>
+        {{ end }}
+    {{ end }}
+    {{ if $nerazvrscena_gradiva }}
+    <h2>Ostala gradiva</h2>
+    {{ end }}
+    {{ range $nerazvrscena_gradiva }}
         <div class="card card-body mb-2">
         {{ partial "datoteka_za_prenos.html" . }}
         </div>
