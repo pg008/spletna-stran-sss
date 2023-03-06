@@ -21,4 +21,4 @@
     {{ $ikona = "earmark-pdf" }}
     {{ $prenos = false }}
 {{ end }}
-<li class="me-3"><i class=" me-2 bi bi-file-{{ $ikona }}"></i><a class="text-secondary" href="{{ .RelPermalink }}" {{ if $prenos }}download{{ end }}>{{ strings.TrimSuffix (path.Ext .Name) (strings.TrimPrefix "datoteke/" (strings.TrimPrefix "gradiva/" .Name)) }}</a></li>
+<li class="me-3"><i class=" me-2 bi bi-file-{{ $ikona }}"></i><a class="text-secondary" href="{{ .RelPermalink }}" {{ if $prenos }}download{{ end }}>{{ strings.TrimSuffix (path.Ext .Title) (strings.TrimPrefix "datoteke/" (strings.TrimPrefix "gradiva/" .Title)) }}</a></li>
